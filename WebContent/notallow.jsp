@@ -7,12 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	success page!
-	
-	<a href="${pageContext.request.contextPath }/shiro/logout">logout</a>
-	<br><br>
-	<a href="${pageContext.request.contextPath }/shiro/toadmin">toAdmin</a>
-	<br><br>
-	<a href="${pageContext.request.contextPath }/shiro/touser">touser</a>
+	没有权限！
 </body>
 </html>

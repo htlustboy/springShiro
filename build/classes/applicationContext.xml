@@ -34,15 +34,18 @@
 
     <!-- Enable Shiro Annotations for Spring-configured beans.  Only run after
          the lifecycleBeanProcessor has run: -->
-<!--     <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor"> -->
-<!--         <property name="securityManager" ref="securityManager"/> -->
-<!--     </bean> -->
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+    
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor">
+	</bean>
 
     <!-- Secure Spring remoting:  Ensure any Spring Remoting method invocations can be associated
          with a Subject for security checks. -->
-<!--     <bean id="secureRemoteInvocationExecutor" class="org.apache.shiro.spring.remoting.SecureRemoteInvocationExecutor"> -->
-<!--         <property name="securityManager" ref="securityManager"/> -->
-<!--     </bean> -->
+    <bean id="secureRemoteInvocationExecutor" class="org.apache.shiro.spring.remoting.SecureRemoteInvocationExecutor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
     
     <bean id="jdbcRealm" class="com.spring.realm.JdbcRealm">
     	<property name="credentialsMatcher" ref="md5"></property>
@@ -67,10 +70,12 @@
             <value>
                 /login.jsp = anon
                 /success.jsp = anon
+                /notallow.jsp = anon
                 /shiro/login = anon
                 /shiro/logout = logout
                 /user.jsp=roles[user]
                 /admin.jsp=roles[admin]
+                
                 # everything else requires authentication:
                 /** = authc
             </value>
